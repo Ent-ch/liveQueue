@@ -1,0 +1,13 @@
+md-list()
+    md-subheader.md-no-sticky Secondary Buttons
+    md-list-item.secondary-button-padding(ng-repeat='thing in things')
+        p {{thing.name}}
+        md-button.md-secondary(ng-click='remove(thing)') delete
+    md-subheader.md-no-sticky Total number of things: {{things.length}}
+
+#popupContainer.md-padding()
+   .dialog-demo-content(layout='row', layout-wrap='', layout-margin='')
+     md-button.md-primary.md-raised(ng-click='showAlert($event)', flex='100', flex-gt-md='auto')
+       | Alert Dialog
+     md-button.md-primary.md-raised(ng-click='showAlert2($event)', flex='100', flex-gt-md='auto')
+       | Add Dialog

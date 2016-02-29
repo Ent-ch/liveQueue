@@ -1,0 +1,18 @@
+{
+  "generator-angular-meteor": {
+    "filters": {
+      "js": true,
+      "jade": true,
+      "scss": true,
+      "pagination": false,
+      "framework": "material",
+      "bower": false,
+      "auth": false,
+      "appname": "liveQueApp",
+      "projectname": "liveQue",
+      "modules": "'angular-meteor',\n  'ui.router',\n  'ngMaterial'",
+      "usedBower": false
+    },
+    "appname": "liveQue"
+  }
+}

@@ -1,0 +1,28 @@
+md-toolbar.toolbar(layout='row', layout-align='start center', layout-padding='')
+  .navbar-left(layout='column', layout-align='column')
+    md-button(ng-href='/') Main
+    md-button(ng-href='/about') About
+  span(flex='')
+  .navbar-right 
+  md-content.md-padding(layout-xs='column', layout='row')
+    div(flex-xs='', flex-gt-xs='100', layout='row')
+      md-card
+        md-card-title
+          md-card-title-text
+            span.md-headline Card with image
+            span.md-subhead Small
+          md-card-title-media
+            .md-media-sm.card-media
+        md-card-actions(layout='row', layout-align='end center')
+          md-button Action 1
+          md-button Action 2
+      md-card
+        md-card-title
+          md-card-title-text
+            span.md-headline Card with image
+            span.md-subhead Small
+          md-card-title-media
+            .md-media-sm.card-media
+        md-card-actions(layout='row', layout-align='end center')
+          md-button Action 1
+          md-button Action 2
