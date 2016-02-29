@@ -1,13 +1,31 @@
-md-list()
-    md-subheader.md-no-sticky Secondary Buttons
-    md-list-item.secondary-button-padding(ng-repeat='thing in things')
-        p {{thing.name}}
-        md-button.md-secondary(ng-click='remove(thing)') delete
-    md-subheader.md-no-sticky Total number of things: {{things.length}}
+.menu-demo-container.yellow(layout-align='center center', layout='column')
+    h1.md-title Календарь
+div(ng-repeat='dateValue in dates')
+    md-toolbar.green.md-theme-light(toggle-class='active')
+        h2.md-toolbar-tools
+            span {{dateValue | date:'dd.MM.yyyy'}}
+    md-content(ng-show='$first')
+        md-list
+            md-list-item.md-3-line(ng-repeat='valueHour in hours' ng-class="valueHour.status ? 'red' : 'green'")
+                .md-list-item-text
+                    h3 {{valueHour.time}}
+                    h4 Возмодное описание слота
+                    p(ng-if="valueHour.status") Занято
+                    p(ng-if="!valueHour.status") Свободно
+                md-button.md-secondary.md-raised(ng-if="!valueHour.status" ng-click='showAlert2($event)') Забронировать
+                md-divider(ng-if='!$last')
+    md-progress-linear(ng-if='!$last' md-mode='determinate', value='0')
 
-#popupContainer.md-padding()
-   .dialog-demo-content(layout='row', layout-wrap='', layout-margin='')
-     md-button.md-primary.md-raised(ng-click='showAlert($event)', flex='100', flex-gt-md='auto')
-       | Alert Dialog
-     md-button.md-primary.md-raised(ng-click='showAlert2($event)', flex='100', flex-gt-md='auto')
-       | Add Dialog
+//md-list()
+//    md-subheader.md-no-sticky Secondary Buttons
+//    md-list-item.secondary-button-padding(ng-repeat='thing in things')
+//        p {{thing.name}}
+//        md-button.md-secondary(ng-click='remove(thing)') delete
+//    md-subheader.md-no-sticky Total number of things: {{things.length}}
+
+//#popupContainer.md-padding()
+//   .dialog-demo-content(layout='row', layout-wrap='', layout-margin='')
+//     md-button.md-primary.md-raised(ng-click='showAlert($event)', flex='100', flex-gt-md='auto')
+//       | Alert Dialog
+//     md-button.md-primary.md-raised(ng-click='showAlert2($event)', flex='100', flex-gt-md='auto')
+//       | Add Dialog
