@@ -1,7 +1,9 @@
 angular.module('liveQueApp')
 .controller('MainCtrl', function($scope, $mdDialog, $mdMedia) {
 
-$scope.showAlert = function(ev) {
+  $scope.maxDays = 7;
+
+  $scope.showAlert = function(ev) {
    $mdDialog.show(
      $mdDialog.alert()
        .parent(angular.element(document.querySelector('#popupContainer')))
@@ -14,7 +16,7 @@ $scope.showAlert = function(ev) {
    );
  };
 
-$scope.showAlert2 = function(ev) {
+  $scope.showAlert2 = function(ev) {
     var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
      $mdDialog.show({
        controller: DialogController,
@@ -39,6 +41,38 @@ $scope.showAlert2 = function(ev) {
   $scope.helpers({
     things: function() {
       return Things.find({});
+    },
+    dates: function () {
+      var dates = new Array();
+      for (var index = 0; index < $scope.maxDays; index++) {
+        dates.push(new Date().setDate(new Date().getDate() + index));
+      }
+
+      return dates;
+    },
+    hours: function () {
+      return new Array(
+        {
+          time: "9:00 - 10:00",
+          status: 1,
+        },
+        {
+          time: "11:00 - 12:00",
+          status: 0,
+        },
+        {
+          time: "13:00 - 14:00",
+          status: 0,
+        },
+        {
+          time: "15:00 - 16:00",
+          status: 1,
+        },
+        {
+          time: "17:00 - 18:00",
+          status: 0,
+        }
+      );
     }
   });
 
@@ -49,14 +83,24 @@ $scope.showAlert2 = function(ev) {
   $scope.remove = function(thing) {
     Things.remove({_id: thing._id});
   };
+})
+  .directive('toggleClass', function() {
+    return {
+      restrict: 'A',
+      link: function(scope, element, attrs) {
+        element.bind('click', function() {
+          element.next().toggleClass();
+        });
+      }
+    };
 });
 
 function DialogController($scope, $mdDialog) {
-    $scope.save = function() {
-      if ($scope.form.$valid) {
-        Things.insert($scope.newThing);
-        $scope.newThing = undefined;
-      }
-      $mdDialog.hide();
-    };
+  $scope.save = function() {
+    if ($scope.form.$valid) {
+      Things.insert($scope.newThing);
+      $scope.newThing = undefined;
+    }
+    $mdDialog.hide();
+  };
 }
