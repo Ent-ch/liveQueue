@@ -40,18 +40,22 @@ angular.module('liveQueApp')
 
   $scope.helpers({
     things: function() {
-      return Things.find({});
+      return Tasks.find({});
     },
     dates: function () {
-      var dates = new Array();
+      var dates = [];
       for (var index = 0; index < $scope.maxDays; index++) {
         dates.push(new Date().setDate(new Date().getDate() + index));
       }
 
       return dates;
     },
+    taskDuration: function () {
+      // console.log(Meteor.settings);
+      return GetMeteorSettingsValue('public.taskDuration');
+    },
     hours: function () {
-      return new Array(
+      return [
         {
           time: "9:00 - 10:00",
           status: 1,
@@ -72,7 +76,7 @@ angular.module('liveQueApp')
           time: "17:00 - 18:00",
           status: 0,
         }
-      );
+    ];
     }
   });
 
@@ -81,7 +85,7 @@ angular.module('liveQueApp')
   });
 
   $scope.remove = function(thing) {
-    Things.remove({_id: thing._id});
+    Tasks.remove({_id: thing._id});
   };
 })
   .directive('toggleClass', function() {
@@ -98,7 +102,7 @@ angular.module('liveQueApp')
 function DialogController($scope, $mdDialog) {
   $scope.save = function() {
     if ($scope.form.$valid) {
-      Things.insert($scope.newThing);
+      Tasks.insert($scope.newThing);
       $scope.newThing = undefined;
     }
     $mdDialog.hide();

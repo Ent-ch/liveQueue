@@ -1,0 +1,8 @@
+{
+  "public": {
+    "taskDuration": 40
+  },
+  "private": {
+    "operatorPin": "1234"
+  }
+}
